@@ -1,10 +1,18 @@
 @import "/node_modules/primeflex/primeflex.css";
-@import "/node_modules/primeflex/themes/saga-blue.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+@import "primereact/resources/themes/md-dark-indigo/theme.css";
+@import "/node_modules/primeflex/themes/vela-blue.scss";
+
+@import "./overrides.scss";
+
+@import "./views/register.scss";
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: var(--font-family);
 }
 
 body,
@@ -14,8 +22,12 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  padding: 2rem 4rem;
+}
+
 section {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
 }
