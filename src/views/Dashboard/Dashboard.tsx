@@ -2,8 +2,8 @@ import React, { FC, useEffect, useState } from "react";
 import PlayerPanel from "../PlayerPanel/PlayerPanel";
 import Player from "../../interfaces/Player";
 import axios from "axios";
-import { ENDPOINTS } from "../../config";
-import Loader from "../../assets/scss/components/Loader/Loader";
+import { APIS, ENDPOINTS } from "../../config";
+import Loader from "../../components/Loader/Loader";
 
 const Dashboard: FC = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -25,7 +25,9 @@ const Dashboard: FC = () => {
   }, []);
 
   const fetchPlayers = async (): Promise<Player[]> => {
-    const { data } = await axios.get<Player[]>(ENDPOINTS.GET.GET_PLAYERS_BIO);
+    const { data } = await axios.get<Player[]>(
+      APIS.API_V2 + ENDPOINTS.GET.GET_PLAYERS_BIO
+    );
     return data;
   };
 

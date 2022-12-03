@@ -6,7 +6,7 @@ import RegisterDTO from "../../interfaces/RegisterDTO";
 import { Button } from "primereact/button";
 import axios from "axios";
 import RequestResponse from "../../interfaces/RequestResponse";
-import { ENDPOINTS, FIELDS } from "../../config";
+import { APIS, ENDPOINTS, FIELDS } from "../../config";
 import { useNavigate } from "react-router";
 import CryptoJS from "crypto-js";
 import { Toast } from "primereact/toast";
@@ -92,7 +92,7 @@ const Register: FC = () => {
     setRequestError(false);
     try {
       const { data } = await axios.post<RequestResponse>(
-        ENDPOINTS.POST.REGISTER,
+        APIS.API_V1 + ENDPOINTS.POST.REGISTER,
         values
       );
 

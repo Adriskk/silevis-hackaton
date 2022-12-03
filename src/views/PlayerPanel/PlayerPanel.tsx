@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import DashboardPanelHeader from "../../assets/scss/components/DashboardPanelHeader/DashboardPanelHeader";
+import DashboardPanelHeader from "../../components/DashboardPanelHeader/DashboardPanelHeader";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 import { DataTable } from "primereact/datatable";
 import { Panel } from "primereact/panel";
@@ -11,7 +11,7 @@ import {
   ENDPOINTS,
 } from "../../config";
 import { PlayerTotalStatsTable } from "../../interfaces/PlayerTotalStats";
-import Loader from "../../assets/scss/components/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 import { Column } from "primereact/column";
 import { Chart } from "primereact/chart";
 import { Button } from "primereact/button";
@@ -52,8 +52,8 @@ const PlayerPanel: FC<PlayerPanelProps> = ({ player }) => {
     ],
   });
 
-  useEffect(() => {
-    if (!isToggled && fetched && playerDataState.data?.length > 0) return;
+  const fetchDataOnClick = () => {
+    if (fetched && playerDataState.data?.length > 0) return;
     setPlayerDataState({ ...playerDataState, loading: true });
 
     try {
@@ -87,7 +87,7 @@ const PlayerPanel: FC<PlayerPanelProps> = ({ player }) => {
     }
 
     setFetched(true);
-  }, [fetched]);
+  };
 
   const fetchPlayerData = async (): Promise<[PlayerTotalStatsTable, [any]]> => {
     const { data } = await axios.get<[PlayerTotalStatsTable, [any]]>(
@@ -119,6 +119,7 @@ const PlayerPanel: FC<PlayerPanelProps> = ({ player }) => {
       collapsed
       toggleable
       className="w-full"
+      onClick={fetchDataOnClick}
     >
       {!playerDataState.loading &&
       Object.keys(playerDataState.data[0]).length > 0 ? (

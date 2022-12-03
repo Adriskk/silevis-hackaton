@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
-import { ENDPOINTS, HEATMAP_CHART_OPTIONS } from "../../config";
+import { APIS, ENDPOINTS, HEATMAP_CHART_OPTIONS } from "../../config";
 import { Card } from "primereact/card";
 import Chart from "react-apexcharts";
 import Player from "../../interfaces/Player";
@@ -18,7 +18,6 @@ const DetailedPlayer: FC = () => {
   });
   const [chartData, setChartData] = useState<[[any], [any]]>([[[]], [[]]]);
   const [playerData, setPlayerData] = useState<Player | null>(null);
-  const [lineCharts, setLineCharts] = useState<any[]>([]);
 
   useEffect(() => {
     if (!id) return;
@@ -52,10 +51,11 @@ const DetailedPlayer: FC = () => {
 
   const fetchDetailedPlayerData = async (): Promise<[[any], [any]]> => {
     const { data } = await axios.get<[[any], [any]]>(
-      ENDPOINTS.GET.GET_PLAYER_DETAILED_STATS.replace(
-        ":id",
-        id || "-1"
-      ).replace(":season", "2021-2022")
+      APIS.API_V2 +
+        ENDPOINTS.GET.GET_PLAYER_DETAILED_STATS.replace(
+          ":id",
+          id || "-1"
+        ).replace(":season", "2021-2022")
     );
     return data;
   };
