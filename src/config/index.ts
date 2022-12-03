@@ -46,6 +46,12 @@ export const DASHBOARD_RADAR_CHART_LABELS: string[] = [
   "Total minutes ratio",
 ];
 
+export const PIE_CHART_LABELS: string[] = [
+  "Defence success rate",
+  "Att success rate",
+  "Pass success rate",
+];
+
 export const DASHBOARD_RADAR_CHART_OPTIONS = {
   scales: {
     r: {
