@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import DashboardPanelHeader from "../../components/DashboardPanelHeader/DashboardPanelHeader";
 import { Splitter, SplitterPanel } from "primereact/splitter";
 import { DataTable } from "primereact/datatable";
@@ -17,6 +17,7 @@ import { Column } from "primereact/column";
 import { Chart } from "primereact/chart";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../hooks/useAuth";
 
 interface PlayerPanelProps {
   player: Player;
@@ -24,8 +25,8 @@ interface PlayerPanelProps {
 
 const PlayerPanel: FC<PlayerPanelProps> = ({ player }) => {
   const navigate = useNavigate();
+  const auth = useAuth();
 
-  const [isToggled] = useState<boolean>(true);
   const [fetched, setFetched] = useState<boolean>(false);
   const [playerDataState, setPlayerDataState] = useState<{
     error: boolean;
@@ -159,11 +160,13 @@ const PlayerPanel: FC<PlayerPanelProps> = ({ player }) => {
             </SplitterPanel>
           </Splitter>
           <div className="flex align-items-center justify-content-end w-full p-3 gap-2">
-            <Button
-              label="Add to favourites"
-              icon="pi pi-star-fill"
-              onClick={addPlayerToFavourites}
-            />
+            {auth?.token && (
+              <Button
+                label="Add to favourites"
+                icon="pi pi-star-fill"
+                onClick={addPlayerToFavourites}
+              />
+            )}
 
             <Button
               label="View details"

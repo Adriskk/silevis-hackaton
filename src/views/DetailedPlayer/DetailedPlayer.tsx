@@ -8,9 +8,11 @@ import Player from "../../interfaces/Player";
 import { Skeleton } from "primereact/skeleton";
 import { splitNumber } from "../../utils/split-number";
 import { Button } from "primereact/button";
+import { useAuth } from "../../hooks/useAuth";
 
 const DetailedPlayer: FC = () => {
   const { id } = useParams<{ id: string }>();
+  const auth = useAuth();
   const [error, setError] = useState<boolean>(false);
   const [loaders, setLoaders] = useState({
     chartData: true,
@@ -86,7 +88,9 @@ const DetailedPlayer: FC = () => {
 
   const CARD_FOOTER = (
     <div className="flex gap-2 justify-content-end">
-      <Button label="Add to favourites" icon="pi pi-star-fill" />
+      {auth?.token && (
+        <Button label="Add to favourites" icon="pi pi-star-fill" />
+      )}
       <Button label="Compare to other" icon="pi pi-user" />
     </div>
   );
@@ -165,7 +169,7 @@ const DetailedPlayer: FC = () => {
       <div className="flex align-items-start justify-content-between gap-4">
         <Card
           className="flex w-full"
-          title="Charts name"
+          title="Correlation"
           subTitle="The graphs show the correlation between the individual performance of each player and the result of the match.
 Four parameters are analyzed: minutes played, goals, assists and a clean sheet.
 A darker heatmap means that the correlation between datasets is higher."

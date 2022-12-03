@@ -1,11 +1,15 @@
-import React, { FC, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 
 import { TabMenu, TabMenuTabChangeParams } from "primereact/tabmenu";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router";
+import { logout, useAuth } from "../hooks/useAuth";
+import { Toast } from "primereact/toast";
 
 const Navigation: FC = () => {
+  const toastRef = useRef<Toast>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const OnChange = (e: TabMenuTabChangeParams) => {
@@ -26,12 +30,37 @@ const Navigation: FC = () => {
         activeIndex={activeIndex}
         onTabChange={(e) => OnChange(e)}
       />
-      <Button
-        label="Login"
-        icon="pi pi-arrow-right"
-        iconPos="right"
-        onClick={() => navigate("/login")}
-      />
+
+      {auth?.token ? (
+        <Button
+          label="Logout"
+          className="p-button-outlined"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          onClick={() =>
+            logout(
+              () => {
+                navigate("/login");
+              },
+              (msg: string) => {
+                toastRef.current?.show({
+                  severity: "error",
+                  summary: "Error",
+                  detail: msg,
+                });
+              }
+            )
+          }
+        />
+      ) : (
+        <Button
+          label="Login"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          onClick={() => navigate("/login")}
+        />
+      )}
+      <Toast ref={toastRef} />
     </nav>
   );
 };

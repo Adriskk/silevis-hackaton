@@ -1,6 +1,7 @@
 export const ENDPOINTS = {
   POST: {
     REGISTER: "/api/register",
+    LOGIN: "/api/login",
     ACTIVATE_ACCOUNT: "/api/activate-user/:token",
   },
 
@@ -11,6 +12,10 @@ export const ENDPOINTS = {
       "/data-science/api/player-total-stats/:id/:season/?format=json",
     GET_PLAYER_DETAILED_STATS:
       "/data-science/api/player-detail-stats/:id/:season/?format=json",
+  },
+
+  DELETE: {
+    REMOVE_AUTH_TOKEN: "/api/token/:userId",
   },
 };
 
