@@ -6,6 +6,7 @@ import { Panel } from "primereact/panel";
 import Player from "../../interfaces/Player";
 import axios from "axios";
 import {
+  APIS,
   DASHBOARD_RADAR_CHART_LABELS,
   DASHBOARD_RADAR_CHART_OPTIONS,
   ENDPOINTS,
@@ -91,10 +92,11 @@ const PlayerPanel: FC<PlayerPanelProps> = ({ player }) => {
 
   const fetchPlayerData = async (): Promise<[PlayerTotalStatsTable, [any]]> => {
     const { data } = await axios.get<[PlayerTotalStatsTable, [any]]>(
-      ENDPOINTS.GET.GET_PLAYER_PANEL_DATA.replace(
-        ":id",
-        player.id.toString()
-      ).replace(":season", "2021-2022")
+      APIS.API_V2 +
+        ENDPOINTS.GET.GET_PLAYER_PANEL_DATA.replace(
+          ":id",
+          player.id.toString()
+        ).replace(":season", "2021-2022")
     );
     return data;
   };

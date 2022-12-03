@@ -62,10 +62,11 @@ const DetailedPlayer: FC = () => {
 
   const fetchPLayerBioData = async (): Promise<Player> => {
     const { data } = await axios.get<Player>(
-      ENDPOINTS.GET.GET_PLAYER_BIO.replace(":id", id || "-1").replace(
-        ":season",
-        "2021-2022"
-      )
+      APIS.API_V2 +
+        ENDPOINTS.GET.GET_PLAYER_BIO.replace(":id", id || "-1").replace(
+          ":season",
+          "2021-2022"
+        )
     );
     return data;
   };
