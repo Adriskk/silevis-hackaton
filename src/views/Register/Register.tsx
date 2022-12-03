@@ -10,13 +10,13 @@ import { APIS, ENDPOINTS, FIELDS } from "../../config";
 import { useNavigate } from "react-router";
 import CryptoJS from "crypto-js";
 import { Toast } from "primereact/toast";
+import { Dialog } from "primereact/dialog";
 
 const Register: FC = () => {
-  // TODO - Add better error handling
-  const navigate = useNavigate();
   const toastRef = useRef<Toast>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
   const [requestError, setRequestError] = useState<boolean>(false);
 
   const requiredMessage: string = "This field is required";
@@ -98,7 +98,7 @@ const Register: FC = () => {
 
       switch (data.status) {
         case "success":
-          navigate("/");
+          setIsDialogVisible(true);
           break;
         case "error":
           toastRef.current?.show({
@@ -116,14 +116,17 @@ const Register: FC = () => {
       if (requestError) {
         toastRef.current?.show({
           severity: "error",
-          summary: "Error occurred",
-          detail: "Something went wrong...",
+          summary: "Could not create an account",
+          detail:
+            "Something went wrong, account with this username or email probably exists",
         });
       }
     }
 
     setIsLoading(false);
   };
+
+  const hideDialog = () => setIsDialogVisible(false);
 
   return (
     <section className="flex align-items-center justify-content-center w-full h-full">
@@ -162,12 +165,25 @@ const Register: FC = () => {
                 label="Register"
                 aria-label="Register"
                 loading={isLoading}
+                type="submit"
               />
             </form>
           )}
         </Formik>
       </div>
       <Toast ref={toastRef} />
+      <Dialog
+        header="E-mail sent"
+        visible={isDialogVisible}
+        style={{ width: "25vw" }}
+        onHide={hideDialog}
+        footer={<Button label="Ok" onClick={hideDialog} />}
+      >
+        <p>
+          We've sent an activation link to your e-mail address. Click the link
+          to activate your account
+        </p>
+      </Dialog>
     </section>
   );
 };

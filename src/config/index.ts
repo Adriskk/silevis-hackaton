@@ -1,6 +1,7 @@
 export const ENDPOINTS = {
   POST: {
     REGISTER: "/api/register",
+    ACTIVATE_ACCOUNT: "/api/activate-user/:token",
   },
 
   GET: {
@@ -100,6 +101,6 @@ export const HEATMAP_CHART_OPTIONS: ApexCharts.ApexOptions = {
 };
 
 export const APIS = {
-  API_V1: "http://192.168.1.190:3000/",
+  API_V1: "http://192.168.1.190:3000",
   API_V2: "https://hackathon-api-2.onrender.com",
 };
