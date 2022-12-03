@@ -1,30 +1,31 @@
-@import '/node_modules/primeflex/primeflex.css';
-@import 'primereact/resources/primereact.min.css';
-@import 'primeicons/primeicons.css';
-@import 'primereact/resources/themes/md-dark-indigo/theme.css';
-@import '/node_modules/primeflex/themes/vela-blue.scss';
+@import "/node_modules/primeflex/primeflex.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+@import "primereact/resources/themes/md-dark-indigo/theme.css";
+@import "/node_modules/primeflex/themes/vela-blue.scss";
 
-@import './overrides.scss';
+@import "./overrides.scss";
 
-@import './views/register.scss';
+@import "./views/register.scss";
+@import "./views/detailed-player.scss";
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	font-family: var(--font-family);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
 }
 
 body,
 html {
-	min-height: 100vh;
-	overflow-x: hidden;
-	scroll-behavior: smooth;
+  min-height: 100vh;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 section {
-	min-height: 100vh;
-	width: 100%;
-	overflow-x: hidden;
-	padding: 2rem 4rem;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  padding: 2rem 4rem;
 }

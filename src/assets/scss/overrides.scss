@@ -2,6 +2,17 @@
   min-width: 300px;
 }
 
-.p-button {
-  min-width: 200px;
+form {
+  .p-button {
+    min-width: 200px;
+  }
+}
+
+.p-panel-content {
+  background-color: var(--surface-50) !important;
+  padding: 1rem !important;
+}
+
+.p-row-odd {
+  display: none;
 }
